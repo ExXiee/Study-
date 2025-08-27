@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.width = Math.round(cssW);  canvas.height = Math.round(cssH);
   }
   window.addEventListener('resize', setCanvasSize); setCanvasSize();
+  const ro = new ResizeObserver(() => setCanvasSize());
+  ro.observe(document.getElementById('gameContainer'));
 
   // ====== Colors from CSS ======
   const cssVar = (n)=>getComputedStyle(document.documentElement).getPropertyValue(n).trim()||'#000';
@@ -192,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     playerNameInput.value = nm; localStorage.setItem('runnerName', nm);
     ensureAudio(); // unlock context
     themeIndex = Number(localStorage.getItem('runnerTheme')||0);
-    showScreen('game'); init(); raf=requestAnimationFrame(gameLoop);
+    showScreen('game'); setCanvasSize(); init(); raf=requestAnimationFrame(gameLoop);
   }
   function endGame(){ isGameOver=true; cancelAnimationFrame(raf); const final=score+coinsCount*10; finalScoreDisplay.textContent=final; showScreen('gameOver'); }
   function updateHUD(){ scoreDisplay.textContent=`Skor: ${score}`; coinsDisplay.textContent=`Koin: ${coinsCount}`; }
