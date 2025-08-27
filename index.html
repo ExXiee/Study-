@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Petualangan Mencari 19 Juta Lapangan Pekerjaan — Plus</title>
+  <meta name="theme-color" content="#2b6cb0" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- MENU UTAMA -->
+  <div class="game-wrapper screen active" id="mainMenu">
+    <h1>Petualangan Mencari 19 Juta Lapangan Pekerjaan</h1>
+    <p>Masukkan nama pemain lalu tekan Mulai.</p>
+    <input id="playerNameInput" placeholder="Pemain" />
+    <div>
+      <button class="btn" id="startButton">Mulai</button>
+      <button class="btn btn-secondary" id="leaderboardButton">Lihat Peringkat</button>
+    </div>
+  </div>
+
+  <!-- LAYAR GAME -->
+  <div class="game-wrapper screen" id="gameContainer">
+    <div id="hud">
+      <div class="left">
+        <div id="scoreDisplay">Skor: 0</div>
+        <div id="coinsDisplay">Koin: 0</div>
+      </div>
+      <div class="right">
+        <button id="btnPause" class="btn small" aria-label="Pause">⏸</button>
+        <button id="btnTheme" class="btn small" aria-label="Ganti Tema">🎨</button>
+        <button id="btnSound" class="btn small" aria-label="Suara">🔊</button>
+        <button id="btnDebug" class="btn small" aria-label="Debug">🐞</button>
+      </div>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+    <button class="btn" id="jumpButton" aria-label="Lompat">LOMPAT</button>
+  </div>
+
+  <!-- GAME OVER -->
+  <div class="game-wrapper screen" id="gameOverScreen">
+    <h2>Game Over</h2>
+    <p>Skor Akhir: <strong id="finalScore">0</strong></p>
+    <div>
+      <button class="btn" id="restartButton">Main Lagi</button>
+      <button class="btn btn-secondary" id="saveScoreButton">Simpan Skor</button>
+      <button class="btn" id="leaderboardBackButton">Kembali ke Menu</button>
+    </div>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div class="game-wrapper screen" id="leaderboardScreen">
+    <h2>Papan Peringkat</h2>
+    <table id="leaderboardTable">
+      <thead><tr><th>#</th><th>Nama</th><th>Skor</th><th>Tanggal</th></tr></thead>
+      <tbody id="leaderboardBody"></tbody>
+    </table>
+    <div>
+      <button class="btn" id="resetLeaderboardButton">Reset Peringkat</button>
+      <button class="btn" id="backToMenuFromLB">Kembali</button>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js').catch(console.error);
+      });
+    }
+  </script>
+</body>
+</html>
